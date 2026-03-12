@@ -1,0 +1,266 @@
+
+/* HEADER SECTION */
+
+/* Header */
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(8px); 
+
+    z-index: 50;
+
+    border-bottom: 1px solid #f1f1f1;
+}
+
+/* Nav Container */
+.nav-container {
+    max-width: 1200px;  
+    margin: 0 auto;     
+    padding: 16px 24px; 
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #213C51;
+    font-size: 18px;
+}
+
+/* Nav Links Container */
+.nav-links {
+    list-style: none; 
+    display: flex;
+    gap: 32px;
+}
+
+/* Individual Link */
+.nav-link {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-link:hover {
+    color: #111;
+}
+
+
+
+/* HERO SECTION*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.hero-section {
+    padding: 80px 20px;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+
+.hero-text h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #213C51;
+}
+
+.hero-text p {
+    font-size: 24px;
+    color: #555;
+}
+
+
+/* Buttons */
+.button-hero {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-log {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 12px 30px;
+    background-color: #0C2C55;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-log:hover {
+    background-color: #213C51;
+}
+
+.btn-reg {
+    padding: 12px 30px;
+    background-color: transparent;
+    color: #111;
+    border: 2px solid #0C2C55;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-reg:hover {
+    background-color: #f5f5f5;
+}
+
+/* Image */
+.hero-image {
+    height: 400px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ABOUT SECTION */
+
+/* About Section */
+.about-section {
+    padding: 80px 24px;
+    background-color: white;
+}
+
+/* Container */
+.about-container {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+/* Text Center */
+.about-text {
+    font-family:Arial, Helvetica, sans-serif ;
+    text-align: center;
+    margin-bottom: 48px;
+
+}
+
+.about-text h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #213C51;
+    margin-bottom: 24px;
+}
+
+.about-description {
+    font-size: 18px;
+    color: #2B2A2A;
+    line-height: 1.7;
+}
+
+/* Grid Cards */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+}
+
+/* Card */
+.about-card {
+    text-align: center;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* FOOTER SECTION*/
+
+/* Footer Background */
+.footer {
+    background-color: #111827; /* bg-gray-900 */
+    color: #d1d5db; /* text-gray-300 */
+    padding: 48px 24px;
+}
+
+/* Container */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Grid Layout */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+/* Titles */
+.footer-title {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Text */
+.footer-text {
+    color: #9ca3af;
+}
+
+.footer-subtext {
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* Links */
+.footer-link {
+    color: #9ca3af;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 4px;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: white;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    border-top: 1px solid #1f2937;
+    margin-top: 32px;
+    padding-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
