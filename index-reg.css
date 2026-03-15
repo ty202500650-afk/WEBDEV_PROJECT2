@@ -150,6 +150,41 @@
     font-size: 0.9em;
 }
 
+.login-as {
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.28);
+}
+
+.login-as input {
+    display: none;
+}
+
+.login-as label {
+    padding: 8px 14px;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: #fff;
+    background: #213C51;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.login-as label:not(:last-of-type) {
+    border-right: 1px solid #1f2937;
+}
+
+#student:checked ~ label[for="student"],
+#admin:checked ~ label[for="admin"] {
+    background: #111827;
+}
+
+.login-as input#student:checked + label[for="student"],
+.login-as input#admin:checked + label[for="admin"] {
+    background: #111827;
+}
+
 button {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
@@ -205,7 +240,7 @@ button {
 .features-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 20px;
+    padding: 100px 20px;
 }
 
 .features-text {
