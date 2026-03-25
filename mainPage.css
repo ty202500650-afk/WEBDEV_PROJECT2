@@ -1,0 +1,149 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.container{
+display:flex;
+height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:220px;
+background:#1e293b;
+color:white;
+padding:20px;
+}
+
+.logo{
+margin-bottom:40px;
+font-size:22px;
+}
+
+.sidebar nav a{
+display:block;
+color:white;
+text-decoration:none;
+padding:12px;
+margin-bottom:10px;
+border-radius:6px;
+transition:0.3s;
+}
+
+.sidebar nav a #logout-link{
+color: #1e293b;
+}
+
+.sidebar nav a:hover{
+background:#334155;
+}
+
+/* MAIN CONTENT */
+
+.main{
+flex:1;
+padding:40px;
+}
+
+.main h1{
+margin-bottom:30px;
+}
+
+
+
+/* CHART */
+
+.gird {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+    
+.chart{
+padding: 25px;
+border-radius: 12px;
+transition: 0.3s;
+margin: 10px;
+padding:25px;
+border-radius:10px;
+width:500px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.chart:hover {
+    transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+}.chart h2{
+margin-bottom:20px;
+}
+
+.bar-group{
+margin-bottom:20px;
+}
+
+.bar-group label{
+display:block;
+margin-bottom:6px;
+}
+
+.bar{
+height:20px;
+border-radius:20px;
+}
+
+.income{
+width:80%;
+background:#22c55e;
+}
+
+.expense{
+width:40%;
+background:#ef4444;
+}
+
+.remaining{
+width:60%;
+background:#3b82f6;
+}
+
+/* VOTING */
+
+.voting{
+background:white;
+padding:25px;
+border-radius:10px;
+width:400px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.voting p{
+margin-bottom:20px;
+}
+
+.voting label{
+display:block;
+margin-bottom:10px;
+}
+
+.voting button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.voting button:hover{
+background:#2563eb;
+}
