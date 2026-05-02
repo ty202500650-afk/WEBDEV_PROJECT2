@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Council | Dashboard</title>
+<link rel="stylesheet" href="../manager_css/dashboardPage.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo"><h2>STUDENT COUNCIL</h2></div>
+    <nav>
+      <a class="active" href="../manager_html/dashboardPage.html">Dashboard</a>
+      <a href="../manager_html/budgetRequest.html">Budget Request</a>
+      <a href="../manager_html/projectProposal.html">Project Proposal</a>
+      <a href="../manager_html/announcementPage.html">Announcements</a>
+      <a id="logout-link" href="../html/index.html"><strong>Logout</strong></a>
+    </nav>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+     <!-- HEADER SECTION with Bell Icon (Right Corner Trigger) -->
+    <div class="out-box">
+      <h1>Main Dashboard</h1>
+      <div class="notification-trigger" id="notificationBell">
+        <span class="bell-icon">N</span>
+        <span class="notif-badge-dot" id="pendingCountBadge">8</span>
+      </div>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="summary">
+      <div class="card">
+        <p>Total Budget</p>
+        <h2>₱50,000</h2>
+      </div>
+      <div class="card">
+        <p>Total Expenses</p>
+        <h2>₱32,000</h2>
+      </div>
+      <div class="card">
+        <p>Remaining Budget</p>
+        <h2>₱18,000</h2>
+      </div>
+      <div class="card">
+        <p>Number of Students</p>
+        <h2>420</h2>
+      </div>
+    </div>
+
+    <!-- CHARTS SECTION - MONTHLY ABOVE, SEMESTER BELOW -->
+    <div class="charts-container">
+      
+      <!-- MONTHLY BAR CHART (TOP) -->
+      <div class="card chart-card">
+        <h3>Monthly Expenses 2026</h3>
+        <div class="bar-chart monthly-chart" id="monthlyChartContainer"></div>
+      </div>
+
+      <!-- SEMESTER BAR CHART (BOTTOM - UNDER MONTHLY) -->
+      <div class="card chart-card">
+        <h3>Semester Expenses 2025-2026</h3>
+        <div class="bar-chart semester-chart" id="semesterChartContainer"></div>
+      </div>
+
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="stats-row">
+      <div class="card stat-card">
+        <p>Total Income</p>
+        <h2>₱52,800</h2>
+      </div>
+      <div class="card stat-card">
+        <p>Total Expenses</p>
+        <h2>₱32,000</h2>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- MODAL -->
+<div id="chartModal" class="modal">
+  <div class="modal-content large">
+    <span class="close-btn">&times;</span>
+    <h2 id="modalTitle">Budget Requests</h2>
+    <div id="requestList"></div>
+  </div>
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modalOverlay"></div>
+
+<!-- NOTIFICATION MODAL (right corner) -->
+<div class="notification-modal" id="notificationModal">
+  <div class="modal-header">
+    <h3>
+      Notifications 
+      <span class="badge-count-modal" id="modalPendingCount">8</span>
+    </h3>
+    <button class="close-modal" id="closeModalBtn">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="notif-table-wrapper">
+      <table class="notif-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Semester</th>
+            <th>Description</th>
+            <th>Department</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="notificationTableBody">
+          <!-- Data loaded dynamically from JS but matches the exact content from notificationPage -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-close-footer" id="footerCloseBtn">Close</button>
+  </div>
+</div>
+
+ <!-- For GRAPHS -->
+<script>
+// SAMPLE DATA WITH BREAKDOWN
+const budgetData = {
+  "Jan": [
+    { name: "Sports Event", total: "₱2,000", breakdown: ["Equipment ₱1200", "Snacks ₱500", "Misc ₱300"] },
+    { name: "Class Supplies", total: "₱2,500", breakdown: ["Paper ₱1000", "Ink ₱800", "Markers ₱700"] }
+  ],
+  "Feb": [
+    { name: "Valentines Program", total: "₱3,800", breakdown: ["Decor ₱1500", "Food ₱1300", "Sound ₱1000"] }
+  ],
+  "Mar": [
+    { name: "Foundation Week", total: "₱6,200", breakdown: ["Stage ₱2500", "Food ₱2000", "Prizes ₱1700"] }
+  ],
+  "Apr": [
+    { name: "Easter Festival", total: "₱5,100", breakdown: ["Decor ₱2000", "Egg hunt ₱1800", "Snacks ₱1300"] }
+  ],
+  "May": [
+    { name: "Summer Camp", total: "₱4,300", breakdown: ["Transport ₱1500", "Meals ₱1800", "Materials ₱1000"] }
+  ],
+  "Jun": [
+    { name: "Independence Day", total: "₱3,500", breakdown: ["Flags ₱1000", "Program ₱1500", "Snacks ₱1000"] }
+  ],
+  "Jul": [
+    { name: "Midyear Review", total: "₱4,800", breakdown: ["Printing ₱1800", "Venue ₱2000", "Food ₱1000"] }
+  ],
+  "Aug": [
+    { name: "Buwan ng Wika", total: "₱5,500", breakdown: ["Costumes ₱2500", "Props ₱1500", "Snacks ₱1500"] }
+  ],
+  "Sep": [
+    { name: "Science Fair", total: "₱4,100", breakdown: ["Exhibits ₱2100", "Prizes ₱1200", "Materials ₱800"] }
+  ],
+  "Oct": [
+    { name: "Halloween Party", total: "₱3,600", breakdown: ["Decor ₱1600", "Costumes ₱1200", "Candy ₱800"] }
+  ],
+  "Nov": [
+    { name: "Thanksgiving Drive", total: "₱4,400", breakdown: ["Food packs ₱2400", "Logistics ₱1200", "Promo ₱800"] }
+  ],
+  "Dec": [
+    { name: "Christmas Gala", total: "₱7,000", breakdown: ["Catering ₱3000", "Decor ₱2000", "Gifts ₱2000"] }
+  ],
+  "1st Sem 2025": [
+    { name: "Orientation", total: "₱10,000", breakdown: ["Stage ₱4000", "Sound ₱3000", "Food ₱3000"] },
+    { name: "Welcome Party", total: "₱18,500", breakdown: ["DJ ₱5000", "Venue ₱8000", "Drinks ₱5500"] }
+  ],
+  "2nd Sem 2025": [
+    { name: "Sports Fest", total: "₱15,200", breakdown: ["Uniforms ₱6000", "Medals ₱4200", "Food ₱5000"] },
+    { name: "Cultural Show", total: "₱16,000", breakdown: ["Props ₱7000", "Lights ₱5000", "Talent ₱4000"] }
+  ],
+  "1st Sem 2026": [
+    { name: "Leadership Summit", total: "₱12,000", breakdown: ["Speakers ₱5000", "Materials ₱4000", "Catering ₱3000"] },
+    { name: "Tech Week", total: "₱10,000", breakdown: ["Gadgets ₱4500", "Workshops ₱3500", "Prizes ₱2000"] }
+  ],
+  "2nd Sem 2026": [
+    { name: "Graduation Ball", total: "₱9,000", breakdown: ["Venue ₱4000", "Catering ₱3000", "Decor ₱2000"] },
+    { name: "Year-End Party", total: "₱7,500", breakdown: ["DJ ₱2500", "Food ₱3000", "Photobooth ₱2000"] }
+  ]
+};
+
+// Monthly expense values
+const monthlyValues = {
+  "Jan": 4500, "Feb": 3800, "Mar": 6200, "Apr": 5100, "May": 4300,
+  "Jun": 3500, "Jul": 4800, "Aug": 5500, "Sep": 4100, "Oct": 3600, "Nov": 4400, "Dec": 7000
+};
+
+function formatPHP(amount) {
+  return '₱' + amount.toLocaleString('en-PH');
+}
+
+// Render monthly chart
+function renderMonthlyChart() {
+  const container = document.getElementById('monthlyChartContainer');
+  if (!container) return;
+  
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const maxValue = 7000;
+  const maxBarHeight = 110;
+  
+  let html = '';
+  for (let month of months) {
+    const amount = monthlyValues[month];
+    const heightRatio = amount / maxValue;
+    let barHeight = Math.max(28, heightRatio * maxBarHeight);
+    barHeight = Math.min(barHeight, 130);
+    
+    html += `
+      <div class="bar-item">
+        <div class="bar-label">${month}</div>
+        <div class="bar-wrapper">
+          <div class="bar" data-label="${month}" style="height: ${barHeight}px;"></div>
+          <span class="bar-value">${formatPHP(amount)}</span>
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+// Render semester chart
+function renderSemesterChart() {
+  const container = document.getElementById('semesterChartContainer');
+  if (!container) return;
+  
+  const semesters = [
+    { label: "1st Sem<br>2025", key: "1st Sem 2025", amount: 28500 },
+    { label: "2nd Sem<br>2025", key: "2nd Sem 2025", amount: 31200 },
+    { label: "1st Sem<br>2026", key: "1st Sem 2026", amount: 22000 },
+    { label: "2nd Sem<br>2026", key: "2nd Sem 2026", amount: 16500 }
+  ];
+  const maxValue = 32000;
+  const maxBarHeight = 120;
+  
+  let html = '';
+  for (let sem of semesters) {
+    const heightRatio = sem.amount / maxValue;
+    let barHeight = Math.max(30, heightRatio * maxBarHeight);
+    barHeight = Math.min(barHeight, 130);
+    
+    html += `
+      <div class="bar-item semester-item">
+        <div class="bar-label">${sem.label}</div>
+        <div class="bar-wrapper">
+          <div class="bar semester-bar" data-label="${sem.key}" style="height: ${barHeight}px;"></div>
+          <span class="bar-value">${formatPHP(sem.amount)}</span>
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+// Bar click handler for modal
+function barClickHandler(e) {
+  const barEl = e.currentTarget;
+  let labelRaw = barEl.getAttribute('data-label');
+  
+  if (!labelRaw) {
+    const parentItem = barEl.closest('.bar-item');
+    if (parentItem) {
+      const labelSpan = parentItem.querySelector('.bar-label');
+      if (labelSpan) {
+        labelRaw = labelSpan.innerText.replace(/<br>/g, ' ').trim();
+      }
+    }
+  }
+  
+  if (!labelRaw) return;
+  
+  let cleanLabel = labelRaw.replace(/<br>/g, ' ').trim();
+  let matchedData = null;
+  
+  // Match monthly
+  if (monthlyValues[cleanLabel]) {
+    matchedData = budgetData[cleanLabel];
+  }
+  // Match semester
+  else if (cleanLabel.includes('1st Sem') && cleanLabel.includes('2025')) {
+    matchedData = budgetData["1st Sem 2025"];
+  }
+  else if (cleanLabel.includes('2nd Sem') && cleanLabel.includes('2025')) {
+    matchedData = budgetData["2nd Sem 2025"];
+  }
+  else if (cleanLabel.includes('1st Sem') && cleanLabel.includes('2026')) {
+    matchedData = budgetData["1st Sem 2026"];
+  }
+  else if (cleanLabel.includes('2nd Sem') && cleanLabel.includes('2026')) {
+    matchedData = budgetData["2nd Sem 2026"];
+  }
+  
+  const modal = document.getElementById('chartModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const requestListDiv = document.getElementById('requestList');
+  
+  modalTitle.innerText = "Budget Requests for " + cleanLabel;
+  requestListDiv.innerHTML = '';
+  
+  if (!matchedData || matchedData.length === 0) {
+    requestListDiv.innerHTML = '<p>No data available.</p>';
+  } else {
+    matchedData.forEach(item => {
+      const div = document.createElement('div');
+      div.classList.add('request-item');
+      div.innerHTML = `
+        <div class="request-header">
+          <span>${item.name}</span>
+          <span>${item.total}</span>
+        </div>
+        <div class="request-details">
+          ${item.breakdown.map(b => `<p>• ${b}</p>`).join('')}
+        </div>
+      `;
+      div.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        const details = div.querySelector('.request-details');
+        details.style.display = details.style.display === 'block' ? 'none' : 'block';
+      });
+      requestListDiv.appendChild(div);
+    });
+  }
+  
+  modal.style.display = 'block';
+}
+
+// Bind click events to all bars
+function bindBarEvents() {
+  document.querySelectorAll('.bar').forEach(bar => {
+    bar.removeEventListener('click', barClickHandler);
+    bar.addEventListener('click', barClickHandler);
+  });
+}
+
+// Modal close handlers
+const modalElem = document.getElementById('chartModal');
+const closeBtn = document.querySelector('.close-btn');
+if (closeBtn) {
+  closeBtn.onclick = () => { modalElem.style.display = 'none'; };
+}
+window.onclick = (e) => {
+  if (e.target === modalElem) {
+    modalElem.style.display = 'none';
+  }
+};
+
+// Initialize everything
+window.addEventListener('DOMContentLoaded', () => {
+  renderMonthlyChart();
+  renderSemesterChart();
+  bindBarEvents();
+});
+</script>
+
+<!-- For Notifications -->
+<script>
+  // EXACT notification dataset from the provided notificationPage
+  const notificationsData = [
+    { date: "2026-04-03", semester: "1st Sem 2026", description: "Hackathon 2026 - Event venue, food, and prizes for winners", department: "Computer Science", amount: "₱15,000", status: "Pending" },
+    { date: "2026-04-02", semester: "1st Sem 2026", description: "IT Summit - Sound system, speakers, and certificates", department: "IT", amount: "₱25,000", status: "Pending" },
+    { date: "2026-04-03", semester: "1st Sem 2026", description: "App Development Workshop - Software licenses and materials", department: "ACT-Application Development", amount: "₱8,000", status: "Pending" },
+    { date: "2026-04-04", semester: "1st Sem 2026", description: "Networking Conference - Router setup, cables, and equipment", department: "ACT-Networking", amount: "₱12,000", status: "Pending" },
+    { date: "2026-04-05", semester: "1st Sem 2026", description: "Coding Bootcamp - Workshop materials and snacks", department: "Computer Science", amount: "₱5,500", status: "Pending" },
+    { date: "2026-04-06", semester: "2nd Sem 2025", description: "Freshmen Orientation - Welcome kits and food", department: "IT", amount: "₱3,500", status: "Approved" },
+    { date: "2026-04-07", semester: "2nd Sem 2025", description: "Cybersecurity Seminar - Venue and speaker fees", department: "Computer Science", amount: "₱9,500", status: "Pending" },
+    { date: "2026-04-08", semester: "2nd Sem 2025", description: "Quiz Bowl - Prizes, certificates and venue", department: "ACT-Application Development", amount: "₱4,500", status: "Approved" },
+    { date: "2026-03-25", semester: "2nd Sem 2025", description: "Graduation Ball - Venue, food and decorations", department: "ACT-Networking", amount: "₱12,000", status: "Approved" },
+    { date: "2026-03-20", semester: "2nd Sem 2025", description: "Library System Upgrade - Software and hardware upgrade", department: "IT", amount: "₱8,500", status: "Approved" }
+  ];
+
+  // Helper: count pending approvals
+  function countPending() {
+    return notificationsData.filter(n => n.status === "Pending").length;
+  }
+
+  // Render table rows inside modal
+  function renderNotificationModal() {
+    const tbody = document.getElementById("notificationTableBody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    notificationsData.forEach(notif => {
+      const row = document.createElement("tr");
+      
+      // Date cell
+      const dateCell = document.createElement("td");
+      dateCell.textContent = notif.date;
+      row.appendChild(dateCell);
+      
+      // Semester cell
+      const semCell = document.createElement("td");
+      semCell.textContent = notif.semester;
+      row.appendChild(semCell);
+      
+      // Description cell with link (notification-link style)
+      const descCell = document.createElement("td");
+      const link = document.createElement("a");
+      link.href = "#";
+      link.className = "notification-link-modal";
+      link.textContent = notif.description.split(" - ")[0]; // Show title like "Hackathon 2026"
+      // but keep full description as tooltip? we can include full on hover, but better to show shortened? For clarity, keep entire description visible? 
+      // However original table shows full description after dash. Let's follow original design: description includes full text.
+      // To match the original notificationPage design: show full description with clickable event name.
+      link.textContent = notif.description.split(" - ")[0];
+      const fullTextSpan = document.createTextNode(` - ${notif.description.split(" - ").slice(1).join(" - ")}`);
+      descCell.appendChild(link);
+      descCell.appendChild(fullTextSpan);
+      row.appendChild(descCell);
+      
+      // Department
+      const deptCell = document.createElement("td");
+      deptCell.textContent = notif.department;
+      row.appendChild(deptCell);
+      
+      // Amount
+      const amountCell = document.createElement("td");
+      amountCell.textContent = notif.amount;
+      row.appendChild(amountCell);
+      
+      // Status with badge
+      const statusCell = document.createElement("td");
+      const statusSpan = document.createElement("span");
+      statusSpan.className = notif.status === "Pending" ? "status-pending" : "status-approved";
+      statusSpan.textContent = notif.status;
+      statusCell.appendChild(statusSpan);
+      row.appendChild(statusCell);
+      
+      tbody.appendChild(row);
+    });
+  }
+
+  // Update pending badge counts (bell icon + modal header)
+  function updatePendingCounters() {
+    const pendingTotal = countPending();
+    const badgeDot = document.getElementById("pendingCountBadge");
+    const modalBadge = document.getElementById("modalPendingCount");
+    if (badgeDot) badgeDot.textContent = pendingTotal;
+    if (modalBadge) modalBadge.textContent = pendingTotal;
+  }
+
+  // Modal controls
+  const modal = document.getElementById("notificationModal");
+  const overlay = document.getElementById("modalOverlay");
+  const bellBtn = document.getElementById("notificationBell");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const footerCloseBtn = document.getElementById("footerCloseBtn");
+
+  function openModal() {
+    modal.classList.add("show");
+    overlay.classList.add("show");
+    // re-render ensures fresh data
+    renderNotificationModal();
+    updatePendingCounters();
+  }
+
+  function closeModal() {
+    modal.classList.remove("show");
+    overlay.classList.remove("show");
+  }
+
+  // Event listeners
+  if (bellBtn) {
+    bellBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openModal();
+    });
+  }
+  if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+  if (footerCloseBtn) footerCloseBtn.addEventListener("click", closeModal);
+  if (overlay) overlay.addEventListener("click", closeModal);
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("show")) {
+      closeModal();
+    }
+  });
+
+  // initial render of counters
+  updatePendingCounters();
+  // pre-render table so it's ready when modal opens (optional)
+  renderNotificationModal();
+
+  // For any dynamic click on notification links (prevent default anchor jumps)
+  document.addEventListener("click", function(e) {
+    if (e.target.classList && e.target.classList.contains("notification-link-modal")) {
+      e.preventDefault();
+      // Optionally you can add logic to view details. For now just prevent page scroll.
+      // Could show alert or nothing.
+      console.log("Notification link clicked:", e.target.textContent);
+    }
+  });
+</script>
+
+
+</body>
+</html>
