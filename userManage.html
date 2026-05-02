@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Admin | User Management</title>
+  <link rel="stylesheet" href="../admin_css/userManagePage.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo"><h2>Admin</h2></div>
+    <nav>
+      <a href="../admin_html/adminPage.html">Dashboard</a>
+      <a href="../admin_html/userManage.html" class="active">User Management</a>
+      <a href="../admin_html/budgetApproval.html">Budget Approval</a>
+      <a href="../admin_html/transactionPage.html">Transactions</a>
+      <a id="logout-link" href="../html/index.html"><strong>Logout</strong></a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <div class="out-box">
+      <h1>User Management</h1>
+      <a class="add-user-btn" id="addUserBtn" href="../admin_html/userManage2.html">+ Add New User</a>
+    </div>
+
+    <!-- USER STATISTICS CARDS -->
+    <div class="user-stats">
+      <div class="card stat-card">
+        <p>Total Users</p>
+        <h2 id="totalUsers">2</h2>
+      </div>
+      <div class="card stat-card">
+        <p>Active Users</p>
+        <h2 id="activeUsers">1</h2>
+      </div>
+      <div class="card stat-card">
+        <p>Inactive Users</p>
+        <h2 id="inactiveUsers">1</h2>
+      </div>
+      <div class="card stat-card">
+        <p>Departments</p>
+        <h2>4</h2>
+      </div>
+    </div>
+
+    <!-- USER TABLE -->
+    <div class="card table-card">
+      <div class="table-header">
+        <h2>User List</h2>
+        <div class="search-filter">
+          <input type="text" id="searchUser" placeholder="Search users...">
+          <select id="deptFilterUser">
+            <option value="all">All Departments</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="ACT-Application Development">ACT-Application Development</option>
+            <option value="ACT-Networking">ACT-Networking</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="userTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody">
+              <tr>
+                <td>2025-00650</td>
+                <td>Chona Mae</td>
+                <td>Chonamae@jiafei.com</td>
+                <td>Computer Science</td>
+                <td>Student</td>
+                <td>Active</td>
+                <td class="action-buttons">
+                  <button class="edit-btn">Edit</button>
+                  <button class="delete-btn">Delete</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+                <td>Annie Mal</td>
+                <td>Annie_mal123@jiafei.com</td>
+                <td>IT</td>
+                <td>Treasurer</td>
+                <td>Active</td>
+                <td class="action-buttons">
+                  <button class="edit-btn">Edit</button>
+                  <button class="delete-btn">Delete</button>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ADD/EDIT USER MODAL -->
+              <th>Actions</th>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ADD/EDIT USER MODAL -->
+<div id="userModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Add New User</h3>
+      <span class="close-modal">&times;</span>
+    </div>
+    <form id="userForm">
+      <input type="hidden" id="userId" value="">
+      <div class="form-group">
+        <label for="fullName">Full Name *</label>
+        <input type="text" id="fullName" required placeholder="Enter full name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" required placeholder="Enter email address">
+      </div>
+      <div class="form-group">
+        <label for="department">Department *</label>
+        <select id="department" required>
+          <option value="">Select Department</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Information Technology">Information Technology</option>
+          <option value="ACT-Application Development">ACT-Application Development</option>
+          <option value="ACT-Networking">ACT-Networking</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="role">Role *</label>
+        <select id="role" required>
+          <option value="Student">Student</option>
+          <option value="Faculty">Faculty</option>
+          <option value="Staff">Staff</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="status">Status *</label>
+        <select id="status" required>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+        <button type="submit" class="save-btn">Save User</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

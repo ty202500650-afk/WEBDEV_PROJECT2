@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Admin | Dashboard</title>
+  <link rel="stylesheet" href="../admin_css/adminPage.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo"><h2>Admin</h2></div>
+    <nav>
+      <a class
+      ="../admin_html/adminPage.html">Dashboard</a>
+      <a href="../admin_html/userManage.html">User Management</a>
+      <a href="../admin_html/budgetApproval.html">Budget Approval</a>
+      <a href="../admin_html/transactionPage.html">Transactions</a>
+      <a id="logout-link" href="../html/index.html"><strong>Logout</strong></a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- HEADER SECTION with Bell Icon (Right Corner Trigger) -->
+    <div class="out-box">
+      <h1>Main Dashboard</h1>
+      <div class="notification-trigger" id="notificationBell">
+        <span class="bell-icon">N</span>
+        <span class="notif-badge-dot" id="pendingCountBadge">8</span>
+      </div>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="summary">
+      <div class="card">
+        <p>Total Budget</p>
+        <h2>₱50,000</h2>
+      </div>
+      <div class="card">
+        <p>Total Expenses</p>
+        <h2>₱32,000</h2>
+      </div>
+      <div class="card">
+        <p>Remaining Budget</p>
+        <h2>₱18,000</h2>
+      </div>
+      <div class="card">
+        <p>Number of Students</p>
+        <h2>420</h2>
+      </div>
+    </div>
+
+    <!-- CHARTS SECTION -->
+    <div class="charts-container">
+      
+      <!-- MONTHLY BAR CHART -->
+      <div class="card chart-card">
+        <h3>Monthly Expenses 2026</h3>
+        <div class="bar-chart monthly-chart">
+          <div class="bar-item">
+            <div class="bar-label">Jan</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 45px;"></div>
+              <span class="bar-value">₱4,500</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Feb</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 38px;"></div>
+              <span class="bar-value">₱3,800</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Mar</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 62px;"></div>
+              <span class="bar-value">₱6,200</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Apr</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 51px;"></div>
+              <span class="bar-value">₱5,100</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">May</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 43px;"></div>
+              <span class="bar-value">₱4,300</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Jun</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 35px;"></div>
+              <span class="bar-value">₱3,500</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Jul</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 48px;"></div>
+              <span class="bar-value">₱4,800</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Aug</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 55px;"></div>
+              <span class="bar-value">₱5,500</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Sep</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 41px;"></div>
+              <span class="bar-value">₱4,100</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Oct</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 36px;"></div>
+              <span class="bar-value">₱3,600</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Nov</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 44px;"></div>
+              <span class="bar-value">₱4,400</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Dec</div>
+            <div class="bar-wrapper">
+              <div class="bar" style="height: 70px;"></div>
+              <span class="bar-value">₱7,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEMESTER BAR CHART -->
+      <div class="card chart-card">
+        <h3>Semester Expenses 2025-2026</h3>
+        <div class="bar-chart semester-chart">
+          <div class="bar-item semester-item">
+            <div class="bar-label">1st Sem<br>2025</div>
+            <div class="bar-wrapper">
+              <div class="bar semester-bar" style="height: 85px;"></div>
+              <span class="bar-value">₱28,500</span>
+            </div>
+          </div>
+          <div class="bar-item semester-item">
+            <div class="bar-label">2nd Sem<br>2025</div>
+            <div class="bar-wrapper">
+              <div class="bar semester-bar" style="height: 92px;"></div>
+              <span class="bar-value">₱31,200</span>
+            </div>
+          </div>
+          <div class="bar-item semester-item">
+            <div class="bar-label">1st Sem<br>2026</div>
+            <div class="bar-wrapper">
+              <div class="bar semester-bar" style="height: 65px;"></div>
+              <span class="bar-value">₱22,000</span>
+            </div>
+          </div>
+          <div class="bar-item semester-item">
+            <div class="bar-label">2nd Sem<br>2026</div>
+            <div class="bar-wrapper">
+              <div class="bar semester-bar" style="height: 48px;"></div>
+              <span class="bar-value">₱16,500</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE STATS -->
+    <div class="stats-row">
+      <div class="card stat-card">
+        <p>Total Income</p>
+        <h2>₱52,800</h2>
+      </div>
+      <div class="card stat-card">
+        <p>Total Expenses</p>
+        <h2>₱32,000</h2>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modalOverlay"></div>
+
+<!-- NOTIFICATION MODAL (right corner) -->
+<div class="notification-modal" id="notificationModal">
+  <div class="modal-header">
+    <h3>
+      Notifications 
+      <span class="badge-count-modal" id="modalPendingCount">8</span>
+    </h3>
+    <button class="close-modal" id="closeModalBtn">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="notif-table-wrapper">
+      <table class="notif-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Semester</th>
+            <th>Description</th>
+            <th>Department</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="notificationTableBody">
+          <!-- Data loaded dynamically from JS but matches the exact content from notificationPage -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-close-footer" id="footerCloseBtn">Close</button>
+  </div>
+</div>
+
+<script>
+  // EXACT notification dataset from the provided notificationPage
+  const notificationsData = [
+    { date: "2026-04-03", semester: "1st Sem 2026", description: "Hackathon 2026 - Event venue, food, and prizes for winners", department: "Computer Science", amount: "₱15,000", status: "Pending" },
+    { date: "2026-04-02", semester: "1st Sem 2026", description: "IT Summit - Sound system, speakers, and certificates", department: "IT", amount: "₱25,000", status: "Pending" },
+    { date: "2026-04-03", semester: "1st Sem 2026", description: "App Development Workshop - Software licenses and materials", department: "ACT-Application Development", amount: "₱8,000", status: "Pending" },
+    { date: "2026-04-04", semester: "1st Sem 2026", description: "Networking Conference - Router setup, cables, and equipment", department: "ACT-Networking", amount: "₱12,000", status: "Pending" },
+    { date: "2026-04-05", semester: "1st Sem 2026", description: "Coding Bootcamp - Workshop materials and snacks", department: "Computer Science", amount: "₱5,500", status: "Pending" },
+    { date: "2026-04-06", semester: "2nd Sem 2025", description: "Freshmen Orientation - Welcome kits and food", department: "IT", amount: "₱3,500", status: "Approved" },
+    { date: "2026-04-07", semester: "2nd Sem 2025", description: "Cybersecurity Seminar - Venue and speaker fees", department: "Computer Science", amount: "₱9,500", status: "Pending" },
+    { date: "2026-04-08", semester: "2nd Sem 2025", description: "Quiz Bowl - Prizes, certificates and venue", department: "ACT-Application Development", amount: "₱4,500", status: "Approved" },
+    { date: "2026-03-25", semester: "2nd Sem 2025", description: "Graduation Ball - Venue, food and decorations", department: "ACT-Networking", amount: "₱12,000", status: "Approved" },
+    { date: "2026-03-20", semester: "2nd Sem 2025", description: "Library System Upgrade - Software and hardware upgrade", department: "IT", amount: "₱8,500", status: "Approved" }
+  ];
+
+  // Helper: count pending approvals
+  function countPending() {
+    return notificationsData.filter(n => n.status === "Pending").length;
+  }
+
+  // Render table rows inside modal
+  function renderNotificationModal() {
+    const tbody = document.getElementById("notificationTableBody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    notificationsData.forEach(notif => {
+      const row = document.createElement("tr");
+      
+      // Date cell
+      const dateCell = document.createElement("td");
+      dateCell.textContent = notif.date;
+      row.appendChild(dateCell);
+      
+      // Semester cell
+      const semCell = document.createElement("td");
+      semCell.textContent = notif.semester;
+      row.appendChild(semCell);
+      
+      // Description cell with link (notification-link style)
+      const descCell = document.createElement("td");
+      const link = document.createElement("a");
+      link.href = "#";
+      link.className = "notification-link-modal";
+      link.textContent = notif.description.split(" - ")[0]; // Show title like "Hackathon 2026"
+      // but keep full description as tooltip? we can include full on hover, but better to show shortened? For clarity, keep entire description visible? 
+      // However original table shows full description after dash. Let's follow original design: description includes full text.
+      // To match the original notificationPage design: show full description with clickable event name.
+      link.textContent = notif.description.split(" - ")[0];
+      const fullTextSpan = document.createTextNode(` - ${notif.description.split(" - ").slice(1).join(" - ")}`);
+      descCell.appendChild(link);
+      descCell.appendChild(fullTextSpan);
+      row.appendChild(descCell);
+      
+      // Department
+      const deptCell = document.createElement("td");
+      deptCell.textContent = notif.department;
+      row.appendChild(deptCell);
+      
+      // Amount
+      const amountCell = document.createElement("td");
+      amountCell.textContent = notif.amount;
+      row.appendChild(amountCell);
+      
+      // Status with badge
+      const statusCell = document.createElement("td");
+      const statusSpan = document.createElement("span");
+      statusSpan.className = notif.status === "Pending" ? "status-pending" : "status-approved";
+      statusSpan.textContent = notif.status;
+      statusCell.appendChild(statusSpan);
+      row.appendChild(statusCell);
+      
+      tbody.appendChild(row);
+    });
+  }
+
+  // Update pending badge counts (bell icon + modal header)
+  function updatePendingCounters() {
+    const pendingTotal = countPending();
+    const badgeDot = document.getElementById("pendingCountBadge");
+    const modalBadge = document.getElementById("modalPendingCount");
+    if (badgeDot) badgeDot.textContent = pendingTotal;
+    if (modalBadge) modalBadge.textContent = pendingTotal;
+  }
+
+  // Modal controls
+  const modal = document.getElementById("notificationModal");
+  const overlay = document.getElementById("modalOverlay");
+  const bellBtn = document.getElementById("notificationBell");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const footerCloseBtn = document.getElementById("footerCloseBtn");
+
+  function openModal() {
+    modal.classList.add("show");
+    overlay.classList.add("show");
+    // re-render ensures fresh data
+    renderNotificationModal();
+    updatePendingCounters();
+  }
+
+  function closeModal() {
+    modal.classList.remove("show");
+    overlay.classList.remove("show");
+  }
+
+  // Event listeners
+  if (bellBtn) {
+    bellBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openModal();
+    });
+  }
+  if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+  if (footerCloseBtn) footerCloseBtn.addEventListener("click", closeModal);
+  if (overlay) overlay.addEventListener("click", closeModal);
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("show")) {
+      closeModal();
+    }
+  });
+
+  // initial render of counters
+  updatePendingCounters();
+  // pre-render table so it's ready when modal opens (optional)
+  renderNotificationModal();
+
+  // For any dynamic click on notification links (prevent default anchor jumps)
+  document.addEventListener("click", function(e) {
+    if (e.target.classList && e.target.classList.contains("notification-link-modal")) {
+      e.preventDefault();
+      // Optionally you can add logic to view details. For now just prevent page scroll.
+      // Could show alert or nothing.
+      console.log("Notification link clicked:", e.target.textContent);
+    }
+  });
+</script>
+
+</body>
+</html>
